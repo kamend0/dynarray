@@ -5,10 +5,6 @@
 	solution which allows an int array to have no specified size at compile
 	time, and instead dynamically expand and contract as needed to accomodate
 	runtime changes.
-
-	The initial length and capacity have to be specified up-front just like a
-	regular C array; but the helper methods are what make this particular
-	struct dynamic.
 */
 
 
