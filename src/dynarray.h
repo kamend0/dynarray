@@ -62,3 +62,25 @@ void da_append(DynArray* arr, int value) {
 	arr->len++;
 }
 
+int* da_get(DynArray* arr, unsigned int index) {
+	/*
+		Returns a pointer to the value in arr->data at the requested index; if
+		the requested index is out-of-bounds, returns NULL.
+	*/
+
+	if ((index < 0) || (arr->len < (index + 1))) { return NULL; }
+
+	return (arr->data + index);
+}
+
+int da_pop(DynArray* arr) {
+	/*
+		Returns the last integer in the arr->data array. Undefined behavior for
+		empty arrays; will crash. Memory at the original location is not
+		modified; we "remove" by simply changing the tracked length.
+	*/
+	arr->len--;
+
+	return *(arr->data + arr->len);
+}
+
