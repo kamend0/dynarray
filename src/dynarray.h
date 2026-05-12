@@ -1,10 +1,10 @@
 /*
-	Implementing a Dynamic Integer Array in C
+Implementing a Dynamic Integer Array in C
 
-	Problem is: C arrays must be defined with a given size. This implements a
-	solution which allows an int array to have no specified size at compile
-	time, and instead dynamically expand and contract as needed to accomodate
-	runtime changes.
+Problem is: C arrays must be defined with a given size. This implements a
+solution which allows an int array to have no specified size at compile
+time, and instead dynamically expand and contract as needed to accomodate
+runtime changes.
 */
 
 #include <stdlib.h>
@@ -76,6 +76,17 @@ void da_remove(DynArray* arr, unsigned int index) {
 		*(arr->data + i) = *(arr->data + i + 1);
 	}
 	arr->len--;
+}
+
+void da_modify(DynArray* arr, unsigned int index, int newValue) {
+	/*
+	Sets the value at the passed index to the passed newValue. Non-op for
+	indices that are out-of-bounds.
+	*/
+
+	if (index >= arr->len) { return; }
+
+	*(arr->data + index) = newValue;
 }
 
 int* da_get(DynArray* arr, unsigned int index) {
