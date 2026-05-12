@@ -7,13 +7,11 @@
 	runtime changes.
 */
 
-
 #include <stdlib.h>
 
 
 const int INIT_BUFFER = 8;  // multiple of sizeof(int)
 const int BUFFER_MULT = 2;  // multiple of current size when reallocating
-
 
 typedef struct DynArray {
    int* data; 			// pointer to (first element of) actual data
@@ -21,11 +19,11 @@ typedef struct DynArray {
    size_t capacity;		// total amount of elements that can currently fit
 } DynArray;
 
-
 void da_init(DynArray* arr) {
 	/*
-	    Initialize an array with valid but essentially empty data.
+	Initialize an array with valid but essentially empty data.
 	*/
+
 	arr->data = NULL;
 	arr->len = 0;
 	arr->capacity = 0;
@@ -33,12 +31,11 @@ void da_init(DynArray* arr) {
 
 void da_append(DynArray* arr, int value) {
 	/*
-	    Idea: check current len and capacity. If adding the new value would
-	    push the arr over its allocated memory limit, then increase its limit
-	    by some amount to make room for the new value; append it to the end of
-	    the array.
+	Idea: check current len and capacity. If adding the new value would
+	push the arr over its allocated memory limit, then increase its limit
+	by some amount to make room for the new value; append it to the end of
+	the array.
 	*/
-
 
 	if (arr->len == 0) {
 	    // First element: we need to grab an initial amount of space
@@ -61,11 +58,12 @@ void da_append(DynArray* arr, int value) {
 
 void da_remove(DynArray* arr, unsigned int index) {
 	/*
-		Removes the value at the specified index from the array, updating its
-		len accordingly. All further elements shift left. If it's the only
-		element in the array, we essentially re-initialize it. If it's the last
-		element in the array, we just update len.
+	Removes the value at the specified index from the array, updating its
+	len accordingly. All further elements shift left. If it's the only
+	element in the array, we essentially re-initialize it. If it's the last
+	element in the array, we just update len.
 	*/
+
 	if (arr->len == 1) {
 		da_init(arr);
 		return;
@@ -87,26 +85,26 @@ int* da_get(DynArray* arr, unsigned int index) {
 	*/
 
 	if ((index < 0) || (arr->len < (index + 1))) { return NULL; }
-
 	return (arr->data + index);
 }
 
 int da_pop(DynArray* arr) {
 	/*
-		Returns the last integer in the arr->data array. Undefined behavior for
-		empty arrays; will crash. Memory at the original location is not
-		modified; we "remove" by simply changing the tracked length.
+	Returns the last integer in the arr->data array. Undefined behavior for
+	empty arrays; will crash. Memory at the original location is not
+	modified; we "remove" by simply changing the tracked length.
 	*/
-	arr->len--;
 
+	arr->len--;
 	return *(arr->data + arr->len);
 }
 
 void da_print(DynArray* arr) {
 	/*
-	   Helper function to print the elements of the array followed by its
-	   current len and capacity.
+	Helper function to print the elements of the array followed by its
+	current len and capacity.
 	*/
+
 	for (size_t i = 0; i < arr->len; i++) {
 		printf("%d", *(arr->data + i));
 		if (i < (arr->len - 1)) { printf(", "); }
