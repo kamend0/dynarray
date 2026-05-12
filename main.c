@@ -9,13 +9,14 @@ int main() {
 
 	for (int i = 0; i < LIM; i++) {
 		da_append(&da, i);
+		if (i == 0) { da_print(&da); }
 		printf("%d\n", *(da_get(&da, i)));
 	}
 
-	printf("Arr has len %zu.\n", da.len);
+	da_print(&da);
 	int lastValue = da_pop(&da);
-	printf("The last value was %d, but now it's %d.\n", lastValue, *(da_get(&da, (da.len - 1))));
-	printf("Arr now has len %zu.\n", da.len);
+	printf("Popped: %d\n", lastValue);
+	da_print(&da);
 
 	return 0;
 }

@@ -52,14 +52,36 @@ void da_append(DynArray* arr, int value) {
 	    arr->capacity = INIT_BUFFER;
 	    return;
 	} else if ((arr->len + 1) > arr->capacity) {
-	    arr->data = realloc(
-			arr->data, sizeof(*(arr->data) * arr->len * BUFFER_MULT)
+	    int* np = realloc(
+			arr->data, sizeof(*(arr->data)) * arr->len * BUFFER_MULT
 		);
+		arr->data = np;
 	    arr->capacity *= BUFFER_MULT;
 	}
 
 	*(arr->data + arr->len) = value;
 	arr->len++;
+}
+
+void da_remove(DynArray* arr, unsigned int index) {
+	/*
+		Removes the value at the specified index from the array, updating its
+		len accordingly. All further elements shift left. If it's the only
+		element in the array, we essentially re-initialize it. If it's the last
+		element in the array, we just update len.
+	*/
+	if (arr->len == 1) {
+		da_init(arr);
+		return;
+	} else if (index == arr->len) {
+		arr->len--;
+		return;
+	}
+
+	for (size_t i = index; i < (arr->len - 1); i++) {
+		*(arr->data + i) = *(arr->data + i + 1);
+	}
+	arr->len--;
 }
 
 int* da_get(DynArray* arr, unsigned int index) {
@@ -82,5 +104,17 @@ int da_pop(DynArray* arr) {
 	arr->len--;
 
 	return *(arr->data + arr->len);
+}
+
+void da_print(DynArray* arr) {
+	/*
+	   Helper function to print the elements of the array followed by its
+	   current len and capacity.
+	*/
+	for (size_t i = 0; i < arr->len; i++) {
+		printf("%d", *(arr->data + i));
+		if (i < (arr->len - 1)) { printf(", "); }
+	}
+	printf("\nCurrent Len: %zu\nCurrent Capacity: %zu\n", arr->len, arr->capacity);
 }
 
