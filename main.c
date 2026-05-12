@@ -18,6 +18,11 @@ int main() {
 	printf("Popped: %d\n", lastValue);
 	da_print(&da);
 
+	// Let's try removing a random element.
+	int doomedIndex = 63;
+	printf("Removing element at index %d; should be %d\n", doomedIndex, *da_get(&da, doomedIndex));
+	da_remove(&da, doomedIndex);
+	da_print(&da);
 	return 0;
 }
 
