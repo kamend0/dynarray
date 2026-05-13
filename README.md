@@ -2,7 +2,7 @@
 
 This is a project I put together just to learn the basics of C and memory management. An array of dynamic size and of arbitrary but homogeneous type, `DynArray`, is defined in `src/dynarray.h`. `#include`ing this gives access to the `DynArray` struct as well as its related methods, listed below.
 
-I used LLMs as essentially suped-up Google, but really tried to not have them feed me any solutions. I wrote every last piece of code by hand.
+I wrote all code by hand, the good old fashioned way. I did use LLMs as essentially suped-up Google, but tried my darndest to prompt them in such a way to gently nudge and guide rather than provide solutions. This was surprisingly difficult to accomplish.
 
 ## Methods + Signatures
 
