@@ -1,12 +1,8 @@
 # Dynamic Array in C
 
----
-
 This is a project I put together just to learn the basics of C and memory management. An array of dynamic size and of arbitrary but homogeneous type, `DynArray`, is defined in `src/dynarray.h`. `#include`ing this gives access to the `DynArray` struct as well as its related methods, listed below.
 
 I used LLMs as essentially suped-up Google, but really tried to not have them feed me any solutions. I wrote every last piece of code by hand.
-
----
 
 ## Methods + Signatures
 
